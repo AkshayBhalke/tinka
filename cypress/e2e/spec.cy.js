@@ -40,37 +40,23 @@ describe('facebook', () => {
       cy.wait(10000)
       cy.get(".payWithUPIbutton.ng-star-inserted").click()
       cy.wait(10000)
-      // cy.get('.aut-iframe').then(function ($iframe) {
-      //   let body = $iframe.contents().find('body')
-      //   cy.wrap(body).as('bdy1')
-      //   cy.get('@bdy1').find('.razorpay-checkout-frame').then(function ($iframe2) {
-      //     let body1 = $iframe2.contents().find('body')
-      //     cy.wrap(body1).as('bdy')
+      cy.get('.aut-iframe').then(function ($iframe) {
+        let body = $iframe.contents().find('body')
+        cy.wrap(body).as('bdy1')
+        cy.get('@bdy1').find('.razorpay-checkout-frame').then(function ($iframe2) {
+          let body1 = $iframe2.contents().find('body')
+          cy.wrap(body1).as('bdy')
 
 
-      //     cy.get('@bdy').find("#contact").type(credentials.phoneNumber);
-      //     cy.get('@bdy').find("#redesign-v15-cta").click()
-      //     cy.get('@bdy').find("#vpa-upi").type(credentials.upiAddress)
-      //     cy.get('@bdy').find("#redesign-v15-cta").click()
+          cy.get('@bdy').find("#contact").type(credentials.phoneNumber);
+          cy.get('@bdy').find("#redesign-v15-cta").click()
+          cy.get('@bdy').find("#vpa-upi").type(credentials.upiAddress)
+          cy.get('@bdy').find("#redesign-v15-cta").click()
 
 
-      //   })
-      // })
+        })
+      })
 
-//       cy.get('.aut-iframe').then(function($iFrame1){
-//         const iframe2 = $iFrame1.contents().find('.razorpay-checkout-frame')
-//         cy.wrap(iframe2).as('iframe2Ref')
-//         cy.get('@iframe2Ref').then(function($iFrame2){
-//             const iFrame2Contents = $iFrame2.contents().find('body')
-//             // cy.wrap(iFrame2Contents).find("#click_me_2").click()
-
-
-//            cy.wrap(iFrame2Contents).find("#contact").type(credentials.phoneNumber);
-//            cy.wrap(iFrame2Contents).find("#redesign-v15-cta").click()
-//            cy.wrap(iFrame2Contents).find("#vpa-upi").type(credentials.upiAddress)
-//            cy.wrap(iFrame2Contents).find("#redesign-v15-cta").click()
-//     })
-// })
       cy.wait(15000)
       cy.get("div h2").should('be.visible')
         .should('include.text', 'Thank you for subscribing to Trinka');
